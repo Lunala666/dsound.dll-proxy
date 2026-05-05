@@ -62,10 +62,10 @@ pub fn getReal() win.HMODULE { //THOSE WHO KNOW
     _ = w.GetSystemDirectoryW(sys, win.MAX_PATH);
     const system32: []u8 = undefined;
     _ = std.unicode.wtf16LeToWtf8(system32, std.mem.span(sys));
-    const ILoveFemboys = pathAppend(allocator, system32, dll);
+    const path = pathAppend(allocator, system32, dll);
     alloc1.free(system32);
 
-    dllPath = std.unicode.utf8ToUtf16LeAllocZ(alloc1, ILoveFemboys) catch unreachable;
+    dllPath = std.unicode.utf8ToUtf16LeAllocZ(alloc1, path) catch unreachable;
     defer alloc1.free(dllPath);
 
     std.debug.print("DLL: {d}", .{dllPath});
